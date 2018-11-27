@@ -5,6 +5,7 @@
  *  UID 1:    [YOUR UID HERE]
  *  Author 2: [YOUR NAME HERE] // Only if working in
  *  UID 2:    [YOUR UID HERE]  // group
+ *  Author 3: Andrew Hunter Seaman
  */
 
 
