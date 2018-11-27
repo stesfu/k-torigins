@@ -5,7 +5,6 @@
  *  UID 1:    [YOUR UID HERE]
  *  Author 2: [YOUR NAME HERE] // Only if working in
  *  UID 2:    [YOUR UID HERE]  // group
- *  Author 3: Andrew Hunter Seaman
  */
 
 
@@ -230,10 +229,10 @@ class Ktahbject {
     // game: a reference to the game in which it's housed
     // health: by default, 100
     // Set these properties here
-    this.r = r,
-    this.c = c,
-    this.game = game,
-    this.health = 100;
+    // this.r = r, new things
+    // this.c = c,
+    // this.game = game,
+    // this.health = 100;
   }
 
   /*
@@ -253,7 +252,7 @@ class Ktahbject {
     // left, then this.facing = {r: 0, c: -1}; if it just
     // moved up, then this.facing = {r: -1, c: 0}, etc.
     // this.facing = {r: ???, c: ???};
-       this.facing = {r:, c:};
+       // this.facing = {r:, c:}; new thing
     //
     // We'll use the facing property when a player uses
     // their ability, and that ability must occur in a given
@@ -380,7 +379,7 @@ class Zombie {
     // ???
 
     // Leave this line as-is:
-    // this.asset = "zombie";
+    this.asset = "zombie";
   }
 
   /*
@@ -545,12 +544,12 @@ class Game {
             // TODO Create a new Player instance and save it
             // within the game's player property
             // ???
-           // let newPlayer = new Player(r,c,this.game);
+           // let newPlayer = new Player(r,c,this.game); new things
             // TODO add that newly created player object to the
             // ktahbjects array
             // [!] this.addAt
             // this.ktahbjects.push(newPlayer);
-            // this.ktahbjects[r][c] = newPlayer;
+            // this.ktahbjects[r][c] = newPlayer; new things
             break;
           case "Z":
             // TODO Create a new Zombie instance and push it into
@@ -558,16 +557,16 @@ class Game {
             // [!] this.addAt
             // [!] this.nZoms
             // ???
-            // let newZombie = new Zombie(r,c,this.game);
-            // this.ktahbjects[r][c] = newZombie;
-            // this.nZoms++; //Already done Forns?
+            let newZombie = new Zombie(r,c,this.game);
+            this.ktahbjects[r][c] = newZombie;
+            this.nZoms++; //Already done Forns?
             break;
           case "X":
             // TODO Create a new Wall instance and push it into
             // the game's ktahbjects array
             // [!] this.addAt
             // ???
-            // let newWall = new Wall(r,c,this.game);
+            // let newWall = new Wall(r,c,this.game); new things
             // this.ktahbjects[r][c] = newWall;
             break;
         }
