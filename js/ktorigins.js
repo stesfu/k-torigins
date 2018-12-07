@@ -629,6 +629,16 @@ class Game {
     this.ticking = setInterval(function () { game.doTick(); }, this.tickLength);
   }
 
+  pauseGame () {
+    clearInterval(this.ticking);
+    gameScreen.style.display = "none";
+  }
+
+  resumeGame () {
+    this.ticking = setInterval(function () { this.doTick(); }, this.tickLength);
+    gameScreen.style.display = "block";
+  }
+
   /*
    * Adds the given ktahbject to the maze in the position specified;
    * useful for moving ktahbjects from one location to another,
@@ -832,15 +842,3 @@ function isValidMaze (maze) {
   // [Criteria 4, 5 Check]
   return zombieCount >= 1 && playerCount === 1;
 }
-
-document.addEventListener("keypress", function(event) {
-  if (event.keyCode === 13) {
-    gameScreen.style.display = "none";
-  }
-});
-
-document.addEventListener("keypress", function(event) {
-setTimeout(function(){
-  gameScreen.style.display = "inline-block";
-}, 3000);
-});
