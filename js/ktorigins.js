@@ -629,6 +629,14 @@ class Game {
     this.ticking = setInterval(function () { game.doTick(); }, this.tickLength);
   }
 
+  pauseGame () {
+    clearInterval(this.ticking);
+  }
+
+  resumeGame () {
+    this.ticking = setInterval(function () { this.doTick(); }, this.tickLength);
+  }
+
   /*
    * Adds the given ktahbject to the maze in the position specified;
    * useful for moving ktahbjects from one location to another,
@@ -837,10 +845,4 @@ document.addEventListener("keypress", function(event) {
   if (event.keyCode === 13) {
     gameScreen.style.display = "none";
   }
-});
-
-document.addEventListener("keypress", function(event) {
-setTimeout(function(){
-  gameScreen.style.display = "inline-block";
-}, 3000);
 });
