@@ -571,7 +571,7 @@ class Game {
     this.playerDamage = (diffMultiplier + 2) * 5;
     this.cooldown     = (diffMultiplier + 2) * 3;
     this.tickLength   = (3 - diffMultiplier) * 200 + 500;
-    this.surviveTime  = (diffMultiplier + 1) * 15 + 10;
+    this.surviveTime  = 5;//(diffMultiplier + 1) * 15 + 10;
     this.timerMax     = this.surviveTime;
 
     // Parse each cell's contents to create a new
@@ -631,10 +631,12 @@ class Game {
 
   pauseGame () {
     clearInterval(this.ticking);
+    gameScreen.style.display = "none";
   }
 
   resumeGame () {
-    this.ticking = setInterval(function () { this.doTick(); }, this.tickLength);
+    this.ticking = setInterval(this.doTick , this.tickLength);
+    gameScreen.style.display = "";
   }
 
   /*
@@ -709,6 +711,10 @@ class Game {
     updateTimer(this.surviveTime / this.timerMax);
     if (this.surviveTime <= 0) {
       this.nextRound();
+    }
+    if (this.round === 1) {
+      this.pauseGame();
+      setTimeout(this.resumeGame, 3000);
     }
   }
 
@@ -840,9 +846,3 @@ function isValidMaze (maze) {
   // [Criteria 4, 5 Check]
   return zombieCount >= 1 && playerCount === 1;
 }
-
-document.addEventListener("keypress", function(event) {
-  if (event.keyCode === 13) {
-    gameScreen.style.display = "none";
-  }
-});
