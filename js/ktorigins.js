@@ -34,7 +34,8 @@ let lobbyCont  = document.querySelector("#lobby-container"),
 
     //Changing between game and cut scenes
     gameScreen = document.querySelector("#game-container"),
-
+    cutscene = document.querySelector("#cutscene"),
+    music = document.getElementById("YenrofSound"),
     // Any relative paths to game assets, including images,
     // sounds, etc.
     assets = {
@@ -571,7 +572,7 @@ class Game {
     this.playerDamage = (diffMultiplier + 2) * 5;
     this.cooldown     = (diffMultiplier + 2) * 3;
     this.tickLength   = (3 - diffMultiplier) * 200 + 500;
-    this.surviveTime  = (diffMultiplier + 1) * 15 + 10;
+    this.surviveTime  = 5;//(diffMultiplier + 1) * 15 + 10;
     this.timerMax     = this.surviveTime;
 
     // Parse each cell's contents to create a new
@@ -635,7 +636,7 @@ class Game {
   }
 
   resumeGame () {
-    this.ticking = setInterval(function () { this.doTick(); }, this.tickLength);
+    this.ticking = setInterval(function () { this.doTick.bind(game); }, this.tickLength);
     gameScreen.style.display = "block";
   }
 
@@ -714,6 +715,24 @@ class Game {
     }
   }
 
+  //Pause and resume the Game methods
+
+  pauseGame () {
+  clearInterval(this.ticking);
+  gameScreen.style.display = "none";
+  cutscene.style.display = "grid";
+}
+
+resumeGame(game) {
+  game.doTick.bind(game);
+  cutscene.style.display = "none";
+  game.ticking = setInterval(
+  function() {
+    game.doTick();
+  }, game.tickLength);
+  gameScreen.style.display = "";
+}
+
   /*
    * Called after a player survives a round; will kill all
    * remaining zombies and respawn them after a short delay,
@@ -726,7 +745,11 @@ class Game {
     this.timerMax++;
     this.round++;
     this.surviveTime = this.timerMax;
+    if (this.round <= 13) {
     message = "K'tah sleeps... for now...";
+    } else {
+    message = "Does the K'tah sleep?"
+    }
     updateRound(this.round);
 
     // Dramatic delay before next round
@@ -755,7 +778,24 @@ class Game {
       }
 
     }, 3000);
-  }
+    if (this.round===1) {
+      music.src="heatingUp.mp3";
+      this.pauseGame();
+      displayScene(keck0);
+    } else if (this.round===5) {
+      music.src="heatingUp.mp3";
+      this.pauseGame();
+      displayScene(volleyball0);
+    } else if (this.round===9) {
+      music.src="heatingUp.mp3";
+      this.pauseGame();
+      displayScene(keckLab0);
+    } else if (this.round===13) {
+      music.src="heatingUp.mp3";
+      this.pauseGame();
+      displayScene(final0);
+    }
+}
 
   /*
    * Terminates the current game with a score summary
@@ -763,7 +803,11 @@ class Game {
   end () {
     removePlayerKeys();
     clearInterval(this.ticking);
-    alert(`K'tah claims another victim...\n You survived ${this.round} rounds.`);
+    if (this.round < 12) {
+    alert(`Yenrof destroyed you! \n Your identity was stolen day ${this.round} of the apocalypse.`);
+  } else {
+    alert(`Bubbles was too much! \n You lasted ${this.round} days into his terror!`)
+  }
     endGame();
   }
 
@@ -841,4 +885,518 @@ function isValidMaze (maze) {
 
   // [Criteria 4, 5 Check]
   return zombieCount >= 1 && playerCount === 1;
+}
+
+//CUTSCENES
+
+let i = 0,
+    txt = 'Dramatic text coming on the screen',
+    speed = 150,
+    img = document.getElementById("image"),
+    currentImage,
+    gChoice1Path = "",
+    gChoice2Path = "",
+    body = document.getElementById("body");
+
+let final15 = {
+  text: "Yenrof has three stack overflow points | Plus he always writes bad code | and then forces it over mine during merge conflicts in github | I think I'll take my chances!",
+  image: "cutsceneImages/destroyedForney.png",
+  choice1Path: "End",
+  cutscene: 4,
+}
+
+let final14 = {
+  text: "This is getting spicy!",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: final15,
+  cutscene: 4,
+}
+
+let final13 = {
+  text: "I desire your soul, Forney | Perhaps we can come to an agreement... | Yenrof's soul for yours?",
+  image: "cutsceneImages/bubbles.png",
+  choice1Path: final14,
+  cutscene: 4,
+  animation: "fastShake"
+}
+
+let final12 = {
+  text: "Are you kidding me?",
+  image: "cutsceneImages/destroyedForney.png",
+  choice1Path: final13,
+  cutscene: 4,
+}
+
+let final11 = {
+  text: "Go get 'em, champ | You're doing great!",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: final12,
+  cutscene: 4,
+}
+
+let final10 = {
+  text: "Is that Mas- the K'tah?",
+  image: "cutsceneImages/destroyedForney.png",
+  choice1Path: final11,
+  cutscene: 4,
+}
+
+let final9 = {
+  image: "cutsceneImages/bubbles.png",
+  choice1Path: final10,
+  cutscene: 4,
+  animation: "fastShake"
+}
+
+let final8 = {
+  text: "Your zombies are weak | And their palms are sweaty | Spaghetti... something... | So I'll do this myself!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: final9,
+  cutscene: 4,
+  animation: "slowShake",
+}
+
+let final7 = {
+  text: "Damn! | What a plot twist!",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: final8,
+  cutscene: 4,
+}
+
+let final6 = {
+  text: "Ha! | Foolish mortal! | You think you can send the K'tah back to the credits? | I thought better of you | Once the K'tah is alive, it never sleeps!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: final7,
+  cutscene: 4,
+  animation: "slowShake",
+}
+
+let final5 = {
+  text: "Inferior sum, | Inferior sum,",
+  image: "cutsceneImages/yenrof.png",
+  choice1Path: final6,
+  cutscene: 4,
+}
+
+let final4 = {
+  text: "Even though you have a good taste in movies | It is not enough to save you from your treachery! | I know that with the raw CS power of Forney | You would come after me next!!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: final5,
+  cutscene: 4,
+  animation: "slowShake",
+}
+
+let final3 = {
+  text: "I would never think of betraying you | I sat through all of 'Alive or Dead' just to find your summoning call!",
+  image: "cutsceneImages/yenrof.png",
+  choice1Path: final4,
+  cutscene: 4,
+}
+
+let final2 = {
+  text: "NO YENROF | I AM HERE FOR YOU! | The man in sunglasses came and told me of your treachery!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: final3,
+  cutscene: 4,
+  animation: "slowShake",
+}
+
+let final1 = {
+  text: "They are almost finished master | Look at him | He's down to almost one stack overflow point!",
+  image: "cutsceneImages/yenrof.png",
+  choice1Path: final2,
+  cutscene: 4,
+}
+
+let final0 = {
+  text: "Y E N R O F!!!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: final1,
+  cutscene: 4,
+  animation: "slowShake",
+}
+
+
+
+
+
+let keckLab13 = {
+  text: "The ancient power flows through me! | I am the K'tah | You are next Forney | You and your precious Stack Overflow points are mine!!",
+  image: "cutsceneImages/yenrof.png",
+  choice1Path: "End",
+  cutscene: 3,
+}
+
+let keckLab12 = {
+  text: "It seems that these cutscenes happen every 4 rounds. | So I'll probably finish then.",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: keckLab13,
+  cutscene: 3,
+}
+
+let keckLab11 = {
+  text: "Maybe the K'tah will vanquish him! | Hurry go quick!",
+  image: "cutsceneImages/beatupforney.png",
+  choice1Path: keckLab12,
+  cutscene: 3,
+}
+
+let keckLab10 = {
+  text: "Well, if I can get the K'tah to turn on him | Maybe...",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: keckLab11,
+  cutscene: 3,
+}
+
+let keckLab9 = {
+  text: "It wouldn't be the first time",
+  image: "cutsceneImages/beatupforney.png",
+  choice1Path: keckLab10,
+  cutscene: 3,
+}
+
+let keckLab8 = {
+  text: "I bet he sold his soul to the K'tah",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: keckLab9,
+  cutscene: 3,
+}
+
+let keckLab7 = {
+  text: "Speed it up a bit! | I am about to become the whole-brain bread to this zom-burger",
+  image: "cutsceneImages/beatupforney.png",
+  choice1Path: keckLab8,
+  cutscene: 3,
+}
+
+let keckLab6 = {
+  text: "And you know how all the zombies look like Yenrof?",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: keckLab7,
+  cutscene: 3,
+}
+
+let keckLab5 = {
+  text: "Yes?",
+  image: "cutsceneImages/beatupforney.png",
+  choice1Path: keckLab6,
+  cutscene: 3,
+}
+
+let keckLab4 = {
+  text: "You know how he summoned the boss from the depths of IMDb?",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: keckLab5,
+  cutscene: 3,
+}
+
+let keckLab3 = {
+  text: "Tell me",
+  image: "cutsceneImages/beatupforney.png",
+  choice1Path: keckLab4,
+  cutscene: 3,
+}
+
+let keckLab2 = {
+  text: "Forney | If you can hold him off a bit longer | I have a plan",
+  image: "cutsceneImages/endtoal.png",
+  choice1Path: keckLab3,
+  cutscene: 3,
+}
+
+let keckLab1 = {
+  text: "They did call me four-knees in high school...",
+  image: "cutsceneImages/beatupforney.png",
+  choice1Path: keckLab2,
+  cutscene: 3,
+}
+
+let keckLab0 = {
+  text: "Damn it! Damn it! Damn it! | How are you so fast Forney?",
+  image: "cutsceneImages/yenrof.png",
+  choice1Path: keckLab1,
+  cutscene: 3,
+}
+
+
+
+
+
+
+
+
+let volleyball20 = {
+  text: "Of cour- | I mean, we can only assume so. | We need to think of something to stop him...",
+  image: "cutsceneImages/toal_xmas.png",
+  choice1Path: "End",
+  cutscene: 2
+}
+
+let volleyball19 = {
+  text: "Is that the K'tah?",
+  image: "cutsceneImages/builderforney.png",
+  choice1Path: volleyball20,
+  cutscene: 2,
+}
+
+let volleyball18 = {
+  text: "Thank you master! | Ego sum stutus | Ego sum stutus | Ego sum stutus",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball19,
+  cutscene: 2,
+}
+
+let volleyball17 = {
+  text: "So be it! | Say the encantation!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: volleyball18,
+  cutscene: 2,
+  animation: "slowShake",
+}
+
+let volleyball16 = {
+  text: "It's not my fault that Forney got all the intellegence | Please help me end him!",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball17,
+  cutscene: 2,
+}
+
+let volleyball15 = {
+  text: "The (Artificial) Intellegence of your spawn | Is based off of your own intellegence",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: volleyball16,
+  cutscene: 2,
+  animation: "slowShake",
+}
+
+let volleyball14 = {
+  text: "How was I supposed to know he could build walls? | And my spawn just go in random directions | They don't even chase him!",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball15,
+  cutscene: 2,
+}
+
+let volleyball13 = {
+  text: "Do you know how long it takes to teleport from IMDb? | Didn't I tell you I wanted him Alive or Dead | But preferably dead!!",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: volleyball14,
+  cutscene: 2,
+  animation: "slowShake",
+}
+
+let volleyball12 = {
+  text: "Master! | Ev.. Everything is going great! | Th.. The Plan is going fatastically",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball13,
+  cutscene: 2,
+}
+
+let volleyball11 = {
+  text: "Who has disrupted my slumber!?",
+  image: "cutsceneImages/darkenedBubbles.png",
+  choice1Path: volleyball12,
+  cutscene: 2,
+  animation: "slowShake",
+}
+
+let volleyball10 = {
+  text: "Wouldn't you like to know?",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball11,
+  cutscene: 2,
+}
+
+let volleyball9 = {
+  text: "The K'tah? Who is the K'tah?",
+  image: "cutsceneImages/builderforney.png",
+  choice1Path: volleyball10,
+  cutscene: 2,
+}
+
+let volleyball8 = {
+  text: "(Under breath) K'tah, K'tah, K'tah, K'tah",
+  image: "cutsceneImages/toal_xmas.png",
+  choice1Path: volleyball9,
+  cutscene: 2,
+}
+
+let volleyball7 = {
+  text: "Stop desecrating the sacred name!",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball8,
+  cutscene: 2,
+}
+
+let volleyball6 = {
+  text: "Wait, wait, wait | K'torgins is before K'tah | I wasn't supposed to know that yet. | That's my bad.",
+  image: "cutsceneImages/toal_xmas.png",
+  choice1Path: volleyball7,
+  cutscene: 2,
+}
+
+let volleyball5 = {
+  text: "How do you know The Sacred Name?",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball6,
+  cutscene: 2,
+}
+
+let volleyball4 = {
+  text: "I thought you were talking about our volleyball game. | It sounds like you're talking about K'tah.",
+  image: "cutsceneImages/toal_xmas.png",
+  choice1Path: volleyball5,
+  cutscene: 2,
+}
+
+let volleyball3 = {
+  text: "But- we're in the middle of the zombie apocalypse here",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball4,
+  cutscene: 2,
+}
+
+let volleyball2 = {
+  text: "Stop being so dramatic",
+  image: "cutsceneImages/toal_xmas.png",
+  choice1Path: volleyball3,
+  cutscene: 2,
+}
+
+let volleyball1 = {
+  text: "Ever since the day we were born | I knew it was my destiny to DESTROY YOU!",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: volleyball2,
+  cutscene: 2,
+}
+
+
+let volleyball0 = {
+  text: "You started an armageddon to steal my identity?!",
+  image: "cutsceneImages/builderforney.png",
+  choice1Path: volleyball1,
+  cutscene: 2,
+}
+
+
+
+
+
+
+
+
+
+
+
+let keck8 = {
+  text: "I am sure you are dying to know!",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: "End",
+  cutscene: 1,
+}
+
+let keck7 = {
+  text: "Ugh! | What is it this time?",
+  image: "cutsceneImages/forneyxmas.png",
+  choice1Path: keck8,
+  cutscene: 1,
+}
+
+let keck6 = {
+  text: "I am done with those cheap tricks, Forney | I tried to steal your information; | but you did a pretty good job | No, what is coming for you is greater than Norfey Security Company",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: keck7,
+  cutscene: 1,
+}
+
+let keck5 = {
+  text: "Enough of this Yenrof! | I am done (test) playing your games. | Stop trying to steal my identity! | I secured my social security records after last time.",
+  image: "cutsceneImages/forneyxmas.png",
+  choice1Path: keck6,
+  cutscene: 1,
+}
+
+let keck4 = {
+  text: "You thought you had gotten rid of me | Ha! Foolish! | I have returned with a power unfathomable to you | and your (pretty awesome) mortal beard!",
+  image: "cutsceneImages/Yenrof.png",
+  choice1Path: keck5,
+  cutscene: 1,
+}
+
+let keck3 = {
+  text: "I recognize that voice | Yenrof, is that you?",
+  image: "cutsceneImages/forneyxmas.png",
+  choice1Path: keck4,
+  cutscene: 1,
+}
+
+let keck2 = {
+  text: "Yes Master, it is time",
+  image: "cutsceneImages/darkYenrof.png",
+  choice1Path: keck3,
+  cutscene: 1,
+}
+
+let keck1 = {
+  text: "Ahhhh!!!!",
+  image: "cutsceneImages/forneyxmas.png",
+  choice1Path: keck2,
+  cutscene: 1,
+}
+
+let keck0 = {
+  text: "Merry Keckmas Everyone!!",
+  image: "cutsceneImages/forneyxmas.png",
+  choice1Path: keck1,
+  cutscene: 1,
+}
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("text").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+    }
+    if (txt.charAt(i) === "|") {
+      i++;
+      document.getElementById("text").innerHTML = "";
+    }
+  }
+
+function displayScene(choice) {
+    img.src = "media";
+    i = 0;
+    document.getElementById("text").innerHTML = "";
+    txt = choice.text;
+    currentImage = choice.image;
+    img.src = currentImage;
+    gChoice1Path = choice.choice1Path;
+    if (choice.animation === "fastShake") {
+      cutscene.classList.add("fastShake");
+    } else if (choice.animation === "slowShake") {
+      cutscene.classList.add("slowShake");
+    } else {
+      cutscene.classList.remove("fastShake");
+      cutscene.classList.remove("slowShake");
+    }
+    typeWriter();
+}
+
+
+function button1() {
+  if (gChoice1Path!=="End") {
+    displayScene(gChoice1Path);
+    music.play();
+  } else {
+    music.src = "Ktah!.mp3";
+    music.play();
+    activeGame.resumeGame(activeGame);
+  }
+}
+
+function check(choice) {
+  if (choice.cutscene === 1) {
+    sound.src = "heatingUp.mp3";
+  } else {
+    sound.src = "finalBattle.mp3";
+  }
 }
