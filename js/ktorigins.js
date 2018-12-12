@@ -583,7 +583,7 @@ class Game {
     this.playerDamage = (diffMultiplier + 2) * 5;
     this.cooldown     = (diffMultiplier + 2) * 3;
     this.tickLength   = (3 - diffMultiplier) * 200 + 500;
-    this.surviveTime  = 3;//(diffMultiplier + 1) * 15 + 10;
+    this.surviveTime  = 5;//(diffMultiplier + 1) * 15 + 10;
     this.timerMax     = this.surviveTime;
 
     // Parse each cell's contents to create a new

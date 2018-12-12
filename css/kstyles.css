@@ -173,3 +173,100 @@ progress {
   grid-row: game-maze-beg / game-maze-end;
   text-align: center;
 }
+
+/* ---------------------------------------- */
+/* Cutscene Styling */
+/* ---------------------------------------- */
+
+#cutscene {
+display: none;
+grid-template-rows: 2fr 1fr 1fr;
+grid-template-columns: 1fr 4fr 4fr 1fr;
+text-align: center;
+color: white;
+width: 100vw;
+height: 100vh;
+background-size: cover;
+background-attachment: fixed;
+background-repeat: no-repeat;
+font-size: 40px;
+margin: 0;
+padding: 0;
+color: white;
+padding-top: 0px;
+white-space: nowrap;
+overflow: hidden;
+font-family: 'Kalam', cursive;
+}
+
+#text {
+  font-family: 'Bungee';
+  grid-row: 2;
+  grid-column: 2 / 4;
+  font-size: .5em;
+}
+
+#image {
+  margin-top: 5%;
+  grid-row: 1;
+  grid-column: 2/4;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  font-family: 'Kalam', cursive;
+  background-color:##383838;
+  padding:10px;
+  position:relative;
+  font-size:12px;
+  text-decoration:none;
+  color: black;
+  border: solid 1px #FFFFFF;
+  border-radius: 5px;
+  }
+
+  #choice1 {
+    float: left;
+    margin-right: 10%;
+    grid-row: 3;
+    grid-column: 2/4;
+    animation-iteration-count: infinite;
+    margin-bottom: 10%
+  }
+
+
+  .fastShake {
+    animation: shake .25s;
+    animation-iteration-count: infinite;
+  }
+
+  .slowShake {
+    animation: shake .5s;
+    animation-iteration-count: infinite;
+  }
+
+  .verySlowShake {
+    animation: shake 2s;
+    animation-iteration-count: infinite;
+  }
+
+  /*add to make any element shake
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;*/
+
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
