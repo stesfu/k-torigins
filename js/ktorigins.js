@@ -756,6 +756,24 @@ resumeGame(game) {
     this.timerMax++;
     this.round++;
     this.surviveTime = this.timerMax;
+    switch (this.round) {
+    case 1:
+      this.addAt(new Wall(3, 3, this), 3, 3);
+      this.addAt(new Wall(3, 10, this), 3, 10);
+      this.addAt(new Wall(5, 2, this), 5, 2);
+      this.addAt(new Wall(5, 8, this), 5, 8);
+      break;
+    case 5:
+      this.addAt(new Wall(3, 8, this), 3, 8);
+      this.addAt(new Wall(2, 5, this), 2, 5);
+      this.addAt(new Wall(6, 7, this), 6, 7);
+      this.addAt(new Wall(5, 5, this), 5, 5);
+      break;
+    case 9:
+      this.addAt(new Wall(3, 4, this), 3, 4);
+      this.addAt(new Wall(4, 4, this), 4, 4);
+      this.addAt(new Wall(3, 7, this), 3, 7);
+  }
     if (this.round <= 13) {
     message = "K'tah sleeps... for now...";
     } else {
