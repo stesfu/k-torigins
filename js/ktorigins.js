@@ -583,7 +583,7 @@ class Game {
     this.playerDamage = (diffMultiplier + 2) * 5;
     this.cooldown     = (diffMultiplier + 2) * 3;
     this.tickLength   = (3 - diffMultiplier) * 200 + 500;
-    this.surviveTime  = 5;//(diffMultiplier + 1) * 15 + 10;
+    this.surviveTime  = 2;//(diffMultiplier + 1) * 15 + 10;
     this.timerMax     = this.surviveTime;
 
     // Parse each cell's contents to create a new
@@ -925,7 +925,7 @@ let final14 = {
 
 let final13 = {
   text: "I desire your soul, Forney | Perhaps we can come to an agreement... | Yenrof's soul for yours?",
-  image: "cutsceneImages/bubbles.png",
+  image: "cutsceneImages/Keizah.png",
   choice1Path: final14,
   cutscene: 4,
   animation: "fastShake"
@@ -946,14 +946,14 @@ let final11 = {
 }
 
 let final10 = {
-  text: "Is that Mas- the K'tah?",
+  text: "Is that Keiz- the K'tah?",
   image: "cutsceneImages/destroyedForney.png",
   choice1Path: final11,
   cutscene: 4,
 }
 
 let final9 = {
-  image: "cutsceneImages/bubbles.png",
+  image: "cutsceneImages/Keizah.png",
   choice1Path: final10,
   cutscene: 4,
   animation: "fastShake"
@@ -961,7 +961,7 @@ let final9 = {
 
 let final8 = {
   text: "Your zombies are weak | And their palms are sweaty | Spaghetti... something... | So I'll do this myself!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: final9,
   cutscene: 4,
   animation: "slowShake",
@@ -975,11 +975,11 @@ let final7 = {
 }
 
 let final6 = {
-  text: "Ha! | Foolish mortal! | You think you can send the K'tah back to the credits? | I thought better of you | Once the K'tah is alive, it never sleeps!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  text: "Ha! | Foolish mortal! | You think you can send the K'tah back to San Francisco? | I thought better of you | Once the K'tah is alive, it never sleeps!",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: final7,
   cutscene: 4,
-  animation: "slowShake",
+  animation: "fastShake",
 }
 
 let final5 = {
@@ -990,15 +990,15 @@ let final5 = {
 }
 
 let final4 = {
-  text: "Even though you have a good taste in movies | It is not enough to save you from your treachery! | I know that with the raw CS power of Forney | You would come after me next!!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  text: "Even though you have a good taste beverages | It is not enough to save you from your treachery! | I know that with the raw CS power of Forney | You would come after me next!!",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: final5,
   cutscene: 4,
   animation: "slowShake",
 }
 
 let final3 = {
-  text: "I would never think of betraying you | I sat through all of 'Alive or Dead' just to find your summoning call!",
+  text: "I would never think of betraying you | I bought you a Vanilla Freeze every day",
   image: "cutsceneImages/yenrof.png",
   choice1Path: final4,
   cutscene: 4,
@@ -1006,7 +1006,7 @@ let final3 = {
 
 let final2 = {
   text: "NO YENROF | I AM HERE FOR YOU! | The man in sunglasses came and told me of your treachery!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: final3,
   cutscene: 4,
   animation: "slowShake",
@@ -1021,7 +1021,7 @@ let final1 = {
 
 let final0 = {
   text: "Y E N R O F!!!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: final1,
   cutscene: 4,
   animation: "slowShake",
@@ -1095,7 +1095,7 @@ let keckLab5 = {
 }
 
 let keckLab4 = {
-  text: "You know how he summoned the boss from the depths of IMDb?",
+  text: "You know how he summoned the boss from the depths of the Bay Area?",
   image: "cutsceneImages/endtoal.png",
   choice1Path: keckLab5,
   cutscene: 3,
@@ -1158,8 +1158,8 @@ let volleyball18 = {
 }
 
 let volleyball17 = {
-  text: "So be it! | Say the encantation!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  text: "So be it! | Say the incantation!",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: volleyball18,
   cutscene: 2,
   animation: "slowShake",
@@ -1174,7 +1174,7 @@ let volleyball16 = {
 
 let volleyball15 = {
   text: "The (Artificial) Intellegence of your spawn | Is based off of your own intellegence",
-  image: "cutsceneImages/darkenedBubbles.png",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: volleyball16,
   cutscene: 2,
   animation: "slowShake",
@@ -1188,8 +1188,8 @@ let volleyball14 = {
 }
 
 let volleyball13 = {
-  text: "Do you know how long it takes to teleport from IMDb? | Didn't I tell you I wanted him Alive or Dead | But preferably dead!!",
-  image: "cutsceneImages/darkenedBubbles.png",
+  text: "What is the meaning of this? | I was just watching the Nuggets beat the Warriors | And you made summoned me here!!",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: volleyball14,
   cutscene: 2,
   animation: "slowShake",
@@ -1204,7 +1204,7 @@ let volleyball12 = {
 
 let volleyball11 = {
   text: "Who has disrupted my slumber!?",
-  image: "cutsceneImages/darkenedBubbles.png",
+  image: "cutsceneImages/darkKeizah.png",
   choice1Path: volleyball12,
   cutscene: 2,
   animation: "slowShake",
