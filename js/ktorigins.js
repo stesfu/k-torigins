@@ -3,12 +3,12 @@
  *  ==================================================
  *  Author 1: Grayson McKim
  *  UID 1:    994211844
- *  Author 2: Elise Sawan // Only if working in
- *  UID 2:    912235572  // group
- *  Author 2: Andrew Seaman // Only if working in
- *  UID 2:    964099798  // group
- *  Author 2: Salem Tesfu // Only if working in
- *  UID 2:    923828704  // group
+ *  Author 2: Elise Sawan
+ *  UID 2:    912235572
+ *  Author 2: Andrew Seaman
+ *  UID 2:    964099798
+ *  Author 2: Salem Tesfu
+ *  UID 2:    923828704
  */
 
 
@@ -38,6 +38,7 @@ let lobbyCont  = document.querySelector("#lobby-container"),
     music = document.getElementById("YenrofSound"),
     // Any relative paths to game assets, including images,
     // sounds, etc.
+
     assets = {
       images: {
         architect: "./assets/images/architect.png",
@@ -323,6 +324,7 @@ class Player extends Ktahbject{
    * All damage updates the health bar of the player using
    * the updateHealth function.
    */
+
   getEaten () {
     // TODO reduce this player's health property by the amount
     // decided in the game instance's playerDamage property
@@ -461,29 +463,7 @@ class Zombie extends Ktahbject{
   }
 }
 
-// ---------------------------------------------------
-// BUBBLES class
-// Boss Zombie, shoots projectiles and speeds up each time he
-// appears
-// ---------------------------------------------------
-class Bubbles extends Zombie {
-  constructor (r, c, game) {
-    super(r, c, game);
-  }
 
-  act() {
-    let r = this.r,
-        c = this.c,
-        dirs = [{r:0, c:1}, {r:0, c:-1}, {r:1, c:0}, {r:-1, c:0}],
-        chosenDir = dirs[Math.floor(Math.random()*4)],
-        toMoveTo = {r: r + chosenDir.r, c: c + chosenDir.c};
-    if (activeP5.dist(r, c, this.game.player.r, this.game.player.c) <= 1) {
-      this.game.player.getEaten();
-    }
-    this.moveTo(toMoveTo.r, toMoveTo.c);
-  }
-
-}
 // ---------------------------------------------------
 // WALL CLASS
 // Used to model the game's boundaries and impassable
@@ -580,10 +560,10 @@ class Game {
     // getting eaten, the length of a tick, and the
     // amount of time needed to survive based on difficulty
     diffMultiplier    = diffs.indexOf(this.difficulty);
-    this.playerDamage = (diffMultiplier + 2) * 5;
+    this.playerDamage = (diffMultiplier + 2) * 3;
     this.cooldown     = (diffMultiplier + 2) * 3;
     this.tickLength   = (3 - diffMultiplier) * 200 + 500;
-    this.surviveTime  = 2;//(diffMultiplier + 1) * 15 + 10;
+    this.surviveTime  = (diffMultiplier + 1) * 15 + 10;
     this.timerMax     = this.surviveTime;
 
     // Parse each cell's contents to create a new
@@ -774,10 +754,14 @@ resumeGame(game) {
       this.addAt(new Wall(4, 4, this), 4, 4);
       this.addAt(new Wall(3, 7, this), 3, 7);
   }
+  if (this.round === 9){
+    this.player.health += 50;
+    updateHealth(this.player.health/100);
+  }
     if (this.round <= 13) {
     message = "K'tah sleeps... for now...";
     } else {
-    message = "Does the K'tah sleep?"
+    message = "K'tah sleeps... for now...?"
     }
     updateRound(this.round);
 
@@ -835,7 +819,7 @@ resumeGame(game) {
     if (this.round < 12) {
     alert(`Yenrof destroyed you! \n Your identity was stolen day ${this.round} of the apocalypse.`);
   } else {
-    alert(`Bubbles was too much! \n You lasted ${this.round} days into his terror!`)
+    alert(`Keziah was too much! \n You lasted ${this.round} days into his terror!`);
   }
     endGame();
   }
@@ -957,7 +941,7 @@ let final12 = {
 }
 
 let final11 = {
-  text: "Go get 'em, champ | You're doing great!",
+  text: "No wonder why she's so good at the game! | She controls them!!",
   image: "cutsceneImages/endtoal.png",
   choice1Path: final12,
   cutscene: 4,
@@ -993,7 +977,7 @@ let final7 = {
 }
 
 let final6 = {
-  text: "Ha! | Foolish mortal! | You think you can send the K'tah back to San Francisco? | I thought better of you | Once the K'tah is alive, it never sleeps!",
+  text: "Ha! | Foolish mortal! | You think you can send the K'tah back to Santa Clara? | I thought better of you | Once the K'tah is alive, it never sleeps!",
   image: "cutsceneImages/darkKeizah.png",
   choice1Path: final7,
   cutscene: 4,
@@ -1008,7 +992,7 @@ let final5 = {
 }
 
 let final4 = {
-  text: "Even though you have a good taste beverages | It is not enough to save you from your treachery! | I know that with the raw CS power of Forney | You would come after me next!!",
+  text: "Even though you have a good taste in beverages | It is not enough to save you from your treachery! | I know that with the raw CS power of Forney | You would come after me next!!",
   image: "cutsceneImages/darkKeizah.png",
   choice1Path: final5,
   cutscene: 4,
@@ -1057,7 +1041,7 @@ let keckLab13 = {
 }
 
 let keckLab12 = {
-  text: "It seems that these cutscenes happen every 4 rounds. | So I'll probably finish then.",
+  text: "It seems that these cutscenes happen every 4 rounds. | So I'll probably finish then. | In the mean time I'll give you some more health",
   image: "cutsceneImages/endtoal.png",
   choice1Path: keckLab13,
   cutscene: 3,
@@ -1078,7 +1062,7 @@ let keckLab10 = {
 }
 
 let keckLab9 = {
-  text: "It wouldn't be the first time",
+  text: "It wouldn't be the first time he did something like that",
   image: "cutsceneImages/beatupforney.png",
   choice1Path: keckLab10,
   cutscene: 3,
@@ -1155,7 +1139,7 @@ let keckLab0 = {
 
 
 let volleyball20 = {
-  text: "Of cour- | I mean, we can only assume so. | We need to think of something to stop him...",
+  text: "Of cour- | I mean, we can only assume so. | We need to think of something to stop Yenrof...",
   image: "cutsceneImages/toal_xmas.png",
   choice1Path: "End",
   cutscene: 2
@@ -1184,14 +1168,14 @@ let volleyball17 = {
 }
 
 let volleyball16 = {
-  text: "It's not my fault that Forney got all the intellegence | Please help me end him!",
+  text: "It's not my fault that Forney got all the intelligence | Please help me end him!",
   image: "cutsceneImages/Yenrof.png",
   choice1Path: volleyball17,
   cutscene: 2,
 }
 
 let volleyball15 = {
-  text: "The (Artificial) Intellegence of your spawn | Is based off of your own intellegence",
+  text: "The (Artificial) Intelligence of your spawn | Is based off of your own intelligence",
   image: "cutsceneImages/darkKeizah.png",
   choice1Path: volleyball16,
   cutscene: 2,
@@ -1206,7 +1190,7 @@ let volleyball14 = {
 }
 
 let volleyball13 = {
-  text: "What is the meaning of this? | I was just watching the Nuggets beat the Warriors | And you made summoned me here!!",
+  text: "What is the meaning of this? | I was just watching Korean dramas | And you made summoned me here!!",
   image: "cutsceneImages/darkKeizah.png",
   choice1Path: volleyball14,
   cutscene: 2,

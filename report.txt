@@ -1,0 +1,18 @@
+Author 1: Grayson McKim
+UID 1:    994211844
+Author 2: Elise Sawan
+UID 2:    912235572
+Author 2: Andrew Seaman
+UID 2:    964099798
+Author 2: Salem Tesfu
+UID 2:    923828704
+
+Our Added Features!
+
+1. Cut-scenes
+2. Audio implementation
+3. Map changes throughout the game
+
+Cool things to note!
+1. Original game music
+2. Photoshopped images
