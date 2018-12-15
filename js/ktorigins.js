@@ -57,13 +57,13 @@ let lobbyCont  = document.querySelector("#lobby-container"),
     // specifiable arena
     campaignMaze = [
       "XXXXXXXXXXXXX",
-      "XZ....X....ZX",
+      "XZ.........ZX",
       "X...........X",
-      "X...X...X...X",
+      "X...........X",
       "X.....P.....X",
-      "X...X...X...X",
       "X...........X",
-      "XZ....X....ZX",
+      "X...........X",
+      "XZ.........ZX",
       "XXXXXXXXXXXXX"
     ],
     // Size of each cell rendered by p5; shrink to make
